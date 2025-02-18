@@ -294,6 +294,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -311,9 +312,11 @@
             background: linear-gradient(135deg, #fdd822, #f74e00, #f97800);
             background-attachment: fixed;
         }
+
         .container {
             margin-top: 50px;
         }
+
         .command-box {
             background: rgba(0, 0, 0, 0.8);
             padding: 15px;
@@ -321,9 +324,11 @@
             margin-bottom: 15px;
             transition: transform 0.3s;
         }
+
         .command-box:hover {
             transform: scale(1.05);
         }
+
         #search-bar {
             width: 100%;
             padding: 10px;
@@ -335,9 +340,10 @@
             color: white;
         }
 
-        #search-bar::placeholder{
+        #search-bar::placeholder {
             color: white;
         }
+
         .slide {
             padding: 30px;
             border-radius: 10px;
@@ -351,7 +357,7 @@
             overflow: hidden;
         }
 
-        
+
         .code-snippet {
             background-color: #333;
             color: #ffffff;
@@ -380,25 +386,25 @@
             position: relative;
             margin-top: 30px;
         }
-
     </style>
 </head>
+
 <body>
     <div class="header ">GithubCommands
         <!-- <img src="./logo.png" height="40" style="border-radius: 50%;" alt="PyhtonLogo"> -->
     </div>
     <div class="container slide">
-        <h2 class="text-center mb-4">30 Most Used Git Commands</h2>
+        <h2 class="text-center mb-4">%0 Most Used Git Commands</h2>
         <input type="text" id="search-bar" class="form-control" placeholder="Search commands...">
         <div class="row" id="commands-container"></div>
         <div class="syntax-section text-center slide" data-aos="zoom-in">
             <h4>Follow <strong>@telugucoder07</strong> for More Content! </h4>
         </div>
     </div>
-    
 
-</div>
-<div class="footer text-light">© 2025 telugucoder07. All rights reserved.</div>
+
+    </div>
+    <div class="footer text-light">© 2025 telugucoder07. All rights reserved.</div>
 
     <script>
         AOS.init({
@@ -407,38 +413,96 @@
             once: false
         });
 
+        // const gitCommands = [
+        //     { command: "git init", description: "Initialize a new Git repository", telugu: "కొత్త Git నిల్వను ప్రారంభించండి" },
+        //     { command: "git clone <repo_url>", description: "Clone a repository", telugu: "Git నిల్వను క్లోన్ చేయండి" },
+        //     { command: "git status", description: "Check the status of files", telugu: "ఫైళ్ల స్థితిని తనిఖీ చేయండి" },
+        //     { command: "git add <file>", description: "Add a file to the staging area", telugu: "ఫైల్‌ను స్టేజింగ్ ప్రాంతానికి చేర్చండి" },
+        //     { command: "git add .", description: "Add all modified files to staging", telugu: "అన్ని మార్పులను స్టేజింగ్‌లో చేర్చండి" },
+        //     { command: "git commit -m 'Commit message'", description: "Commit changes with a message", telugu: "ఒక సందేశంతో మార్పులను కమిట్ చేయండి" },
+        //     { command: "git log", description: "View commit history", telugu: "కమిట్ చరిత్రను చూడండి" },
+        //     { command: "git log --oneline", description: "View a concise commit history", telugu: "సంక్షిప్త కమిట్ చరిత్రను చూడండి" },
+        //     { command: "git diff", description: "Show commit differences", telugu: "కమిట్ తేడాలను చూపించండి" },
+        //     { command: "git branch <branch_name>", description: "Create a new branch", telugu: "కొత్త బ్రాంచ్‌ను సృష్టించండి" },
+        //     { command: "git branch -a", description: "List all branches", telugu: "అన్ని బ్రాంచ్‌లను చూపించండి" },
+        //     { command: "git checkout <branch_name>", description: "Switch to another branch", telugu: "మరొక బ్రాంచ్‌కు మారండి" },
+        //     { command: "git checkout -b <new_branch>", description: "Create and switch to a new branch", telugu: "కొత్త బ్రాంచ్‌ను సృష్టించి మారండి" },
+        //     { command: "git merge <branch_name>", description: "Merge a branch into the current branch", telugu: "ఒక బ్రాంచ్‌ను ప్రస్తుత బ్రాంచ్‌లో విలీనం చేయండి" },
+        //     { command: "git remote -v", description: "View remote repositories", telugu: "రిమోట్ నిల్వలను చూడండి" },
+        //     { command: "git remote add origin <url>", description: "Add a remote repository", telugu: "రిమోట్ నిల్వను చేర్చండి" },
+        //     { command: "git push -u origin main", description: "Push changes to GitHub", telugu: "GitHubకి మార్పులను పంపండి" },
+        //     { command: "git pull", description: "Fetch and merge changes from remote repository", telugu: "రిమోట్ నిల్వ నుండి మార్పులను పొందండి" },
+        //     { command: "git fetch", description: "Fetch changes from remote without merging", telugu: "విలీనించకుండా మార్పులను పొందండి" },
+        //     { command: "git reset --hard HEAD", description: "Reset the working directory", telugu: "వర్కింగ్ డైరెక్టరీను రీసెట్ చేయండి" },
+        //     { command: "git rebase <branch>", description: "Reapply commits on top of another base branch", telugu: "మరొక బ్రాంచ్‌పై కమిట్లను మళ్లీ వర్తించండి" },
+        //     { command: "git stash", description: "Temporarily store uncommitted changes", telugu: "కమిట్ చేయని మార్పులను తాత్కాలికంగా నిల్వ చేయండి" },
+        //     { command: "git stash pop", description: "Apply stashed changes and remove from stash", telugu: "నిల్వ చేసిన మార్పులను వర్తింపజేసి తొలగించండి" },
+        //     { command: "git tag <tag_name>", description: "Create a new tag", telugu: "కొత్త ట్యాగ్‌ను సృష్టించండి" },
+        //     { command: "git show <commit>", description: "Show details of a specific commit", telugu: "ఒక నిర్దిష్ట కమిట్ వివరాలను చూపించండి" },
+        //     { command: "git blame <file>", description: "Show who last modified each line of a file", telugu: "ఫైల్‌లోని ప్రతి లైన్‌ను చివరిగా ఎవరు మార్చారో చూపించండి" },
+        //     { command: "git rm <file>", description: "Remove a file from Git", telugu: "Git నుండి ఫైల్‌ను తీసివేయండి" },
+        //     { command: "git config --global user.name 'Your Name'", description: "Set global username for Git", telugu: "Git కోసం గ్లోబల్ వినియోగదారు పేరును సెట్ చేయండి" },
+        //     { command: "git config --global user.email 'you@example.com'", description: "Set global email for Git", telugu: "Git కోసం గ్లోబల్ ఇమెయిల్‌ను సెట్ చేయండి" },
+        //     { command: "git cherry-pick <commit_hash>", description: "Apply a specific commit to the current branch", telugu: "ఒక నిర్దిష్ట కమిట్‌ను ప్రస్తుత బ్రాంచ్‌లో వర్తింపజేయండి" }
+        // ];
+
         const gitCommands = [
             { command: "git init", description: "Initialize a new Git repository", telugu: "కొత్త Git నిల్వను ప్రారంభించండి" },
-            { command: "git clone <repo_url>", description: "Clone a repository", telugu: "Git నిల్వను క్లోన్ చేయండి" },
+            { command: "git clone <repo_url>", description: "Clone a repository", telugu: "నిల్వను క్లోన్ చేయండి" },
             { command: "git status", description: "Check the status of files", telugu: "ఫైళ్ల స్థితిని తనిఖీ చేయండి" },
             { command: "git add <file>", description: "Add a file to the staging area", telugu: "ఫైల్‌ను స్టేజింగ్ ప్రాంతానికి చేర్చండి" },
-            { command: "git add .", description: "Add all modified files to staging", telugu: "అన్ని మార్పులను స్టేజింగ్‌లో చేర్చండి" },
-            { command: "git commit -m 'Commit message'", description: "Commit changes with a message", telugu: "ఒక సందేశంతో మార్పులను కమిట్ చేయండి" },
+            { command: "git add .", description: "Add all modified files to staging", telugu: "మార్పు చేసిన అన్ని ఫైళ్లను స్టేజింగ్‌లో చేర్చండి" },
+            { command: "git commit -m 'Commit message'", description: "Commit changes with a message", telugu: "సందేశంతో మార్పులను కమిట్ చేయండి" },
             { command: "git log", description: "View commit history", telugu: "కమిట్ చరిత్రను చూడండి" },
             { command: "git log --oneline", description: "View a concise commit history", telugu: "సంక్షిప్త కమిట్ చరిత్రను చూడండి" },
-            { command: "git diff", description: "Show commit differences", telugu: "కమిట్ తేడాలను చూపించండి" },
+            { command: "git diff", description: "Show differences between commits", telugu: "కమిట్‌ల మధ్య తేడాలను చూపించండి" },
             { command: "git branch <branch_name>", description: "Create a new branch", telugu: "కొత్త బ్రాంచ్‌ను సృష్టించండి" },
             { command: "git branch -a", description: "List all branches", telugu: "అన్ని బ్రాంచ్‌లను చూపించండి" },
             { command: "git checkout <branch_name>", description: "Switch to another branch", telugu: "మరొక బ్రాంచ్‌కు మారండి" },
-            { command: "git checkout -b <new_branch>", description: "Create and switch to a new branch", telugu: "కొత్త బ్రాంచ్‌ను సృష్టించి మారండి" },
+            { command: "git checkout -b <new_branch>", description: "Create and switch to a new branch", telugu: "కొత్త బ్రాంచ్‌ను సృష్టించి దానికి మారండి" },
             { command: "git merge <branch_name>", description: "Merge a branch into the current branch", telugu: "ఒక బ్రాంచ్‌ను ప్రస్తుత బ్రాంచ్‌లో విలీనం చేయండి" },
             { command: "git remote -v", description: "View remote repositories", telugu: "రిమోట్ నిల్వలను చూడండి" },
             { command: "git remote add origin <url>", description: "Add a remote repository", telugu: "రిమోట్ నిల్వను చేర్చండి" },
-            { command: "git push -u origin main", description: "Push changes to GitHub", telugu: "GitHubకి మార్పులను పంపండి" },
-            { command: "git pull", description: "Fetch and merge changes from remote repository", telugu: "రిమోట్ నిల్వ నుండి మార్పులను పొందండి" },
-            { command: "git fetch", description: "Fetch changes from remote without merging", telugu: "విలీనించకుండా మార్పులను పొందండి" },
-            { command: "git reset --hard HEAD", description: "Reset the working directory", telugu: "వర్కింగ్ డైరెక్టరీను రీసెట్ చేయండి" },
-            { command: "git rebase <branch>", description: "Reapply commits on top of another base branch", telugu: "మరొక బ్రాంచ్‌పై కమిట్లను మళ్లీ వర్తించండి" },
+            { command: "git push -u origin main", description: "Push changes to the main branch on the remote repository", telugu: "రిమోట్ నిల్వలోని మెయిన్ బ్రాంచ్‌కు మార్పులను పంపండి" },
+            { command: "git pull", description: "Fetch and merge changes from the remote repository", telugu: "రిమోట్ నిల్వ నుండి మార్పులను పొందండి మరియు విలీనం చేయండి" },
+            { command: "git fetch", description: "Fetch changes from the remote repository without merging", telugu: "విలీనించకుండా రిమోట్ నిల్వ నుండి మార్పులను పొందండి" },
+            { command: "git reset --hard HEAD", description: "Reset the working directory to the last commit", telugu: "వర్కింగ్ డైరెక్టరీని చివరి కమిట్‌కు రీసెట్ చేయండి" },
+            { command: "git rebase <branch>", description: "Reapply commits on top of another base branch", telugu: "మరొక ఆధార బ్రాంచ్‌పై కమిట్‌లను మళ్లీ వర్తింపజేయండి" },
             { command: "git stash", description: "Temporarily store uncommitted changes", telugu: "కమిట్ చేయని మార్పులను తాత్కాలికంగా నిల్వ చేయండి" },
-            { command: "git stash pop", description: "Apply stashed changes and remove from stash", telugu: "నిల్వ చేసిన మార్పులను వర్తింపజేసి తొలగించండి" },
+            { command: "git stash pop", description: "Apply stashed changes and remove them from the stash", telugu: "నిల్వ చేసిన మార్పులను వర్తింపజేసి నిల్వ నుండి తొలగించండి" },
             { command: "git tag <tag_name>", description: "Create a new tag", telugu: "కొత్త ట్యాగ్‌ను సృష్టించండి" },
             { command: "git show <commit>", description: "Show details of a specific commit", telugu: "ఒక నిర్దిష్ట కమిట్ వివరాలను చూపించండి" },
             { command: "git blame <file>", description: "Show who last modified each line of a file", telugu: "ఫైల్‌లోని ప్రతి లైన్‌ను చివరిగా ఎవరు మార్చారో చూపించండి" },
-            { command: "git rm <file>", description: "Remove a file from Git", telugu: "Git నుండి ఫైల్‌ను తీసివేయండి" },
-            { command: "git config --global user.name 'Your Name'", description: "Set global username for Git", telugu: "Git కోసం గ్లోబల్ వినియోగదారు పేరును సెట్ చేయండి" },
-            { command: "git config --global user.email 'you@example.com'", description: "Set global email for Git", telugu: "Git కోసం గ్లోబల్ ఇమెయిల్‌ను సెట్ చేయండి" },
-            { command: "git cherry-pick <commit_hash>", description: "Apply a specific commit to the current branch", telugu: "ఒక నిర్దిష్ట కమిట్‌ను ప్రస్తుత బ్రాంచ్‌లో వర్తింపజేయండి" }
+            { command: "git rm <file>", description: "Remove a file from the working directory and staging area", telugu: "వర్కింగ్ డైరెక్టరీ మరియు స్టేజింగ్ ప్రాంతం నుండి ఫైల్‌ను తీసివేయండి" },
+            { command: "git config --global user.name 'Your Name'", description: "Set the global username for Git", telugu: "Git కోసం గ్లోబల్ వినియోగదారు పేరును సెట్ చేయండి" },
+            { command: "git config --global user.email 'you@example.com'", description: "Set the global email for Git", telugu: "Git కోసం గ్లోబల్ ఇమెయిల్‌ను సెట్ చేయండి" },
+            { command: "git cherry-pick <commit_hash>", description: "Apply a specific commit to the current branch", telugu: "ఒక నిర్దిష్ట కమిట్‌ను ప్రస్తుత బ్రాంచ్‌లో వర్తింపజేయండి" },
+            { command: "git archive --format=zip HEAD > archive.zip", description: "Create a zip archive of the current branch", telugu: "ప్రస్తుత బ్రాంచ్ యొక్క zip ఆర్కైవ్‌ను సృష్టించండి" },
+            { command: "git bisect start", description: "Start binary search to find the commit that introduced a bug", telugu: "బగ్‌ను పరిచయం చేసిన కమిట్‌ను కనుగొనడానికి బైనరీ శోధన ప్రారంభించండి" },
+            { command: "git bisect good <commit>", description: "Mark a commit as good during bisect", telugu: "బిసెక్ట్ సమయంలో ఒక కమిట్‌ను మంచి అని గుర్తించండి" },
+            { command: "git bisect bad <commit>", description: "Mark a commit as bad during bisect", telugu: "బిసెక్ట్ సమయంలో ఒక కమిట్‌ను చెడు అని గుర్తించండి" },
+            { command: "git reflog", description: "Show history of HEAD changes", telugu: "HEAD మార్పుల చరిత్రను చూపించండి" },
+            { command: "git revert <commit>", description: "Undo a commit by creating a new commit", telugu: "కొత్త కమిట్ సృష్టించడం ద్వారా కమిట్‌ను తిరస్కరించండి" },
+            { command: "git shortlog", description: "Summarize commit history", telugu: "కమిట్ చరిత్రను సంక్షిప్తంగా చూపించండి" },
+            { command: "git show-branch", description: "Show branch structure", telugu: "బ్రాంచ్ నిర్మాణాన్ని చూపించండి" },
+            { command: "git config --list", description: "Show current Git configuration", telugu: "ప్రస్తుత Git ఆకృతీకరణను చూపించండి" },
+            { command: "git pull --rebase", description: "Pull changes with rebase instead of merge", telugu: "విలీనించకుండా రీబేస్‌తో మార్పులను పొందండి" },
+            { command: "git tag -l", description: "List all tags", telugu: "అన్ని ట్యాగ్‌లను చూపించండి" },
+            { command: "git commit --amend", description: "Modify the most recent commit", telugu: "ఇటీవల చేసిన కమిట్‌ను సవరించండి" },
+            { command: "git reset <commit>", description: "Reset to a specific commit", telugu: "ఒక నిర్దిష్ట కమిట్‌కు రీసెట్ చేయండి" },
+            { command: "git reset --soft <commit>", description: "Reset but keep changes staged", telugu: "మార్పులను స్టేజింగ్‌లో ఉంచి రీసెట్ చేయండి" },
+            { command: "git reset --hard <commit>", description: "Reset and remove all changes", telugu: "అన్ని మార్పులను తొలగించి రీసెట్ చేయండి" },
+            { command: "git push origin --delete <branch>", description: "Delete a remote branch", telugu: "రిమోట్ బ్రాంచ్‌ను తొలగించండి" },
+            { command: "git diff <branch1> <branch2>", description: "Compare two branches", telugu: "రెండు బ్రాంచ్‌ల మధ్య తేడాలను పోల్చండి" },
+            { command: "git log --graph", description: "Show commit history as a graph", telugu: "కమిట్ చరిత్రను గ్రాఫ్ రూపంలో చూపించండి" },
+            { command: "git cherry <branch>", description: "Show commits in the current branch but not in the target branch", telugu: "ప్రస్తుత బ్రాంచ్‌లో ఉన్న కానీ లక్ష్య బ్రాంచ్‌లో లేని కమిట్‌లను చూపించండి" },
+            { command: "git help <command>", description: "Get help for a specific Git command", telugu: "ఒక నిర్దిష్ట Git కమాండ్ కోసం సహాయం పొందండి" }
         ];
+
+
+
+
+
 
         const container = document.getElementById('commands-container');
         const searchBar = document.getElementById('search-bar');
@@ -474,4 +538,5 @@
         displayCommands();
     </script>
 </body>
+
 </html>
