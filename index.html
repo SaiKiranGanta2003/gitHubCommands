@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Commands</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #fdd822, #f74e00, #f97800);
+            display: flex;
+            flex-direction: column;
+            /* font-family: 'Raleway', sans-serif; */
+            min-height: 100vh;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+
+        code{
+            font-family: 'Raleway';
+            font-size: 1.2em;
+            font-weight: 700;
+            color: rgb(0, 157, 255);
+        }
+        .command-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+        #commandsList{
+            min-height: 35vh;
+            /* background-color: #fdd822; */
+        }
+
+        @media screen and (max-width:768px) {
+            #commandsList{
+            min-height: 50vh;
+            /* background-color: #fdd822; */
+        }
+
+        }
+        .slide {
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            background-color: white;
+            color: black;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .code-snippet {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: Consolas, Monaco, monospace;
+            white-space: pre-wrap;
+        }
+
+        .header {
+            padding: 15px 20px;
+            background-color: transparent;
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            background-color: transparent;
+            padding: 20px;
+            color: white;
+            position: relative;
+            margin-top: 30px;
+        }
+        #logo{
+            height: 1.5em;
+            border-radius: 50%;
+        }
+        #searchBar{
+            background-color: #b7afaf;
+            color: black;
+        }
+        #searchBar::placeholder{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">GitHub Commands <img src="./logo.png" alt="GitHubLogo" id="logo"></div>
+    <div class="container"> <div class="slide">
+        <div class="h4 text-center" data-aos="fade-in">MOST USED 30 GITHUB COMMANDS</div>
+        
+        <input type="text" id="searchBar" class="form-control my-3" placeholder="Search Commands..." onkeyup="filterCommands()">
+    </div>
+        <div id="commandsList"></div>
+    </div>
+    <div class="footer text-light">© 2025 telugucoder07. All rights reserved.</div>
+
+    <script>
+          const commands = [
+    { cmd: "git init", en: "Initialize a new Git repository.", te: "క్రొత్త గిట్ రెపోజిటరీని ప్రారంభించండి." },
+    { cmd: "git clone <repo_url>", en: "Clone an existing repository.", te: "ఉన్న రెపోజిటరీని క్లోన్ చేయండి." },
+    { cmd: "git status", en: "Check the status of files.", te: "ఫైళ్ల స్థితిని తనిఖీ చేయండి." },
+    { cmd: "git add <file>", en: "Add a file to the staging area.", te: "ఫైల్‌ను స్టేజింగ్ ప్రాంతానికి జోడించండి." },
+    { cmd: "git add .", en: "Add all modified files to staging.", te: "మార్చబడిన అన్ని ఫైళ్ళను స్టేజింగ్‌కు జోడించండి." },
+    { cmd: "git commit -m 'Commit message'", en: "Commit changes with a message.", te: "ఒక సందేశంతో మార్పులను కమీట్ చేయండి." },
+    { cmd: "git log", en: "View commit history.", te: "కమీట్ చరిత్రను చూడండి." },
+    { cmd: "git log --oneline", en: "View a concise commit history.", te: "సంక్షిప్త కమీట్ చరిత్రను చూడండి." },
+    { cmd: "git diff", en: "Show commit differences.", te: "కమీట్ తేడాలను చూపించండి." },
+    { cmd: "git branch <branch_name>", en: "Create a new branch.", te: "కొత్త బ్రాంచ్‌ను సృష్టించండి." },
+    { cmd: "git branch -a", en: "List all branches.", te: "అన్ని బ్రాంచ్‌లను చూపించండి." },
+    { cmd: "git checkout <branch_name>", en: "Switch to another branch.", te: "మరో బ్రాంచ్‌కు మారండి." },
+    { cmd: "git checkout -b <new_branch>", en: "Create and switch to a new branch.", te: "కొత్త బ్రాంచ్‌ను సృష్టించి మారండి." },
+    { cmd: "git merge <branch_name>", en: "Merge a branch into the current branch.", te: "ప్రస్తుత బ్రాంచ్‌లో మరొకదాన్ని విలీనం చేయండి." },
+    { cmd: "git branch -d <branch_name>", en: "Delete a local branch.", te: "లోకల్ బ్రాంచ్‌ను తొలగించండి." },
+    { cmd: "git push origin --delete <branch_name>", en: "Delete a remote branch.", te: "రిమోట్ బ్రాంచ్‌ను తొలగించండి." },
+    { cmd: "git remote add origin <repo_url>", en: "Add a remote repository.", te: "రిమోట్ రెపోజిటరీని జోడించండి." },
+    { cmd: "git remote -v", en: "View remote repositories.", te: "రిమోట్ రెపోజిటరీలను చూడండి." },
+    { cmd: "git push -u origin main", en: "Push changes to a remote repository.", te: "మార్పులను రిమోట్ రెపోజిటరీకి పుష్ చేయండి." },
+    { cmd: "git push origin <branch_name>", en: "Push changes to a specific branch.", te: "ఒక నిర్దిష్ట బ్రాంచ్‌కు మార్పులను పుష్ చేయండి." },
+    { cmd: "git pull origin main", en: "Pull latest changes from a remote repository.", te: "రిమోట్ రెపోజిటరీ నుండి తాజా మార్పులను తీసుకోండి." },
+    { cmd: "git checkout -- <file>", en: "Reset a file to the last committed version.", te: "ఫైల్‌ను చివరి కమీట్ చేసిన సంస్కరణకు రీసెట్ చేయండి." },
+    { cmd: "git reset --hard", en: "Reset all files to the last committed version.", te: "అన్ని ఫైళ్లను చివరి కమీట్ చేసిన సంస్కరణకు రీసెట్ చేయండి." },
+    { cmd: "git stash", en: "Stash changes without committing.", te: "కమీట్ చేయకుండా మార్పులను నిల్వ చేయండి." },
+    { cmd: "git stash apply", en: "Apply the latest stash.", te: "తాజా స్టాష్‌ను అప్లై చేయండి." },
+    { cmd: "git rm --cached <file>", en: "Remove a file from Git tracking.", te: "Git ట్రాకింగ్ నుండి ఒక ఫైల్‌ను తొలగించండి." },
+    { cmd: "git show <commit_id>", en: "Show detailed information about a commit.", te: "ఒక కమీట్ గురించి వివరాలు చూపించండి." },
+    { cmd: "git revert <commit_id>", en: "Revert a specific commit.", te: "ఒక నిర్దిష్ట కమీట్‌ను రద్దు చేయండి." },
+    { cmd: "git commit --amend -m 'New message'", en: "Amend the last commit message.", te: "చివరి కమీట్ సందేశాన్ని సవరించండి." },
+    { cmd: "git blame <file>", en: "Show who modified a file line by line.", te: "ఫైల్‌ను పంక్తివారీగా ఎవరు మార్చారో చూపించండి." }
+];
+
+        
+        function displayCommands() {
+            const container = document.getElementById("commandsList");
+            container.innerHTML = "";
+            commands.forEach((command, index) => {
+                const commandDiv = document.createElement("div");
+                commandDiv.className = "command-card";
+                commandDiv.setAttribute("data-aos", "fade-up");
+                commandDiv.setAttribute("data-aos-offset", "100");
+                commandDiv.innerHTML = `
+                <p><strong>${index+1}.</strong> ${command.en}</p>
+                    <p><strong>తెలుగు:</strong> ${command.te}</p>
+                    
+                    <div class="code-snippet"><code>${command.cmd}</code> </div>
+                    
+                `;
+                container.appendChild(commandDiv);
+            });
+        }
+
+        function filterCommands() {
+    const searchValue = document.getElementById("searchBar").value.toLowerCase();
+    const filtered = commands.filter(command => 
+        command.cmd.toLowerCase().includes(searchValue) || 
+        command.en.toLowerCase().includes(searchValue) || 
+        command.te.toLowerCase().includes(searchValue)
+    );
+    const container = document.getElementById("commandsList");
+    container.innerHTML = "";
+
+    if (filtered.length === 0) {
+        container.innerHTML = `<div class='command-card text-center'><strong>NO COMMANDS MATCHED WITH ${searchValue}</strong></div>`;
+        return;
+    }
+
+    filtered.forEach((command, index) => {
+        const commandDiv = document.createElement("div");
+        commandDiv.className = "command-card";
+        commandDiv.setAttribute("data-aos", "fade-up");
+        commandDiv.innerHTML = `
+            <p><strong>${index+1}.</strong> ${command.en}</p>
+                    <p><strong>తెలుగు:</strong> ${command.te}</p>
+                    
+                    <div class="code-snippet"><code>${command.cmd}</code> </div>
+        `;
+        container.appendChild(commandDiv);
+    });
+}
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            displayCommands();
+            AOS.init();
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>
